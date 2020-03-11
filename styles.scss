@@ -1,0 +1,182 @@
+$sirina : 100%;
+$contback : grey;
+$visinah4 : 100px;
+$cardback : rgb(255, 255, 255);
+$trans : all .6s ease;
+$trans2 : all .3s ease;
+$linecolor : rgb(172, 172, 172);;
+@mixin boxshadow {
+    box-shadow: 0 0 5px black;
+}
+@mixin lineargrad {
+    background-image: linear-gradient(to bottom right, rgb(65, 64, 64), rgb(165, 165, 165) 50%, rgb(165, 165, 165) 50%, rgb(65, 64, 64) 100%);
+}
+@mixin lineargradhover {
+    background-image: linear-gradient(to top right, rgb(255, 0, 85), rgb(117, 0, 128));
+}
+@mixin flexcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.height-100 {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include flexcenter();
+}
+.sectiontitle{
+    transform: rotate(-3deg);  
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 100px; 
+    text-align: center;
+    position: absolute;
+    top:-70px;
+    color: black;   
+    width: 105%;
+    padding: 10px;
+    line-height: 2.1rem;
+    mix-blend-mode: screen;
+    background-color: white;
+}
+.cardcontainer{
+    width: $sirina;
+    height: $sirina;
+    @include flexcenter();
+    .pozadina{
+        position: absolute;
+        top: 20vh;
+        width: 100%;
+        height: 80vh;
+        background: rgb(248, 248, 248);
+        z-index: -1;
+    }
+    .subtitle{
+        color: black;
+        font-size: 1.2rem;
+        width: 90%;
+        align-self: center;
+        @include flexcenter();
+        h3{
+            width: 60%;
+            text-align: center;
+        }
+    }
+    .card1{
+        max-width: 250px !important;
+    }
+    .card{
+        width: 260px;
+        height: 320px;
+        padding: 10px;
+        background: $cardback;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        margin-right:30px;
+        margin-left: 30px;
+        margin-bottom: 200px;
+        @include flexcenter();
+        &::before{
+            z-index: -1;
+            position: absolute;
+            content: '';
+            top: 0px;
+            left: 0px;
+            width: 260px;
+            height: 320px;
+            @include lineargrad();
+            transform: skew(1deg, 1deg);
+            //transition: $trans;
+        }
+        &:hover::before{
+            //@include boxshadow();//
+            transform: skew(-1deg, -1deg);
+            //transition: $trans;
+            @include lineargradhover();
+        }
+        &:hover ~ .card::before{
+            transform: skew(1deg, .9deg);
+            transition: $trans;
+        }
+        &:hover > .txtarea h4{
+            border: 1px solid rgba(224, 224, 224, 0.507);
+            box-shadow: 0 0 30px rgba(187, 187, 187, 0.452) inset;
+            color: purple;
+            transition: $trans2;
+        }
+        &:hover > .txtarea h4::before{
+            height: 40px;
+            transition: $trans2;
+        }
+        &:hover > .txtarea h4::after{
+            opacity: 1;
+            transition: $trans2;
+            transition-delay: .3s;
+        }
+        .txtarea{
+            padding: 7px;
+            color: rgb(80, 80, 80);
+            @include flexcenter();
+            height: 100%;
+            h4{
+                position: absolute;
+                border-radius: 50%;
+                top:20px;
+                border: 1px solid rgba(108, 4, 112, 0.164);
+                text-align: center;
+                width: 100px;
+                height: $visinah4;
+                transition: $trans2;
+                @include flexcenter();
+                box-shadow: 0 0 0px rgb(187, 187, 187) inset;
+                transition-delay: .6s;
+                i{
+                    opacity: .6;
+                }
+                &::after{
+                    position: absolute;
+                    content: '';
+                    top: 138px;
+                    left: 25px;
+                    width: 50px;
+                    height: 1px;
+                    opacity: 0;
+                    background: $linecolor;
+                    transition: $trans2;
+                    
+                }
+                &::before{
+                    position: absolute;
+                    content: '';
+                    top:100%;
+                    left: 50%;
+                    width: 1px;
+                    height: 0px;
+                    background: $linecolor;
+                    transition: $trans2;
+                    transition-delay: .3s;
+                }
+            }
+            h3{
+                position: absolute;
+                top: 50%;
+                transition: $trans2;
+            }
+            &:hover h3{
+                color: purple;
+                transition: $trans2;
+                transition-delay: .6s;
+                
+            }
+            p{
+                align-self: flex-end;
+                text-align: justify;
+                font-size: .9rem;
+            }
+        }
+    }
+}
